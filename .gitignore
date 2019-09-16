@@ -1,5 +1,12 @@
 # OS Generated files
 .DS_Store
 
+# Generated files
+/terraform.tfvars
+/community/backend.tf
+/tfplan
+
 # Terraform files
 .terraform
+terraform.tfstate
+terraform.tfstate.backup
