@@ -1,2 +1,5 @@
 # OS Generated files
 .DS_Store
+
+# Terraform files
+.terraform
