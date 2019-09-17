@@ -46,6 +46,7 @@ resource "aws_route53_record" "validation" {
 
 # Wait for validation to complete
 resource "aws_acm_certificate_validation" "main" {
+  provider                  = "aws.us-east-1"
   certificate_arn           = "${aws_acm_certificate.main.arn}"
   validation_record_fqdns   = [
     "${aws_route53_record.validation.fqdn}"

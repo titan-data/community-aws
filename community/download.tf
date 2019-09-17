@@ -25,6 +25,7 @@ resource "aws_s3_bucket" "download" {
 
 # CloudFront
 resource "aws_cloudfront_distribution" "download-site" {
+  provider              = "aws.us-east-1"
   origin {
     domain_name         = "${aws_s3_bucket.download.bucket_domain_name}"
     origin_id           = "${aws_s3_bucket.download.id}-origin"
@@ -60,7 +61,7 @@ resource "aws_cloudfront_distribution" "download-site" {
   }
 
   viewer_certificate {
-    acm_certificate_arn         = "${aws_acm_certificate.main.arn}"
+    acm_certificate_arn         = "${aws_acm_certificate_validation.main.certificate_arn}"
     ssl_support_method          = "sni-only"
     minimum_protocol_version    = "TLSv1.1_2016"
   }
