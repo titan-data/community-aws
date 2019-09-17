@@ -13,31 +13,11 @@ resource "aws_s3_bucket" "logs" {
 # Download bucket
 resource "aws_s3_bucket" "download" {
   bucket = "${var.project}-download"
+  acl = "public-read"
   force_destroy = true
 
   logging {
     target_bucket = "${aws_s3_bucket.logs.id}"
     target_prefix = "download/"
   }
-}
-
-# Public access
-resource "aws_s3_bucket_policy" "download" {
-  bucket = "${aws_s3_bucket.download.id}"
-
-  policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "AddPerm",
-      "Effect": "Allow",
-      "Principal": "*",
-      "Action": "s3:GetObject",
-
-      "Resource": "${aws_s3_bucket.download.arn}/*"
-    }
-  ]
-}
-EOF
 }
