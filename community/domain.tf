@@ -1,11 +1,12 @@
 #
-# Configure master DNS zone. Projects that need a sub-domain or individual
-# records should be configured alongside the associated resources.
+# Configure master resources for hosting sites. Projects that need a sub-domain
+# or individual records should be configured alongside the associated resources.
 #
 # This also sets up additional domain-wide resources, such as a TLS certificate
 # that can be used in CloudFront configuration.
 #
 
+# Main DNS Zone
 resource "aws_route53_zone" "main" {
   name = "${local.domain}"
 }
@@ -45,4 +46,18 @@ resource "aws_acm_certificate_validation" "main" {
   validation_record_fqdns   = [
     "${aws_route53_record.validation.fqdn}"
   ]
+}
+
+# Shared S3 bucket for access logging
+resource "aws_s3_bucket" "logs" {
+  bucket = "${var.project}-logs"
+  force_destroy = true
+  acl = "log-delivery-write"
+}
+
+resource "aws_s3_bucket_public_access_block" "logs" {
+  bucket = "${aws_s3_bucket.logs.id}"
+
+  block_public_acls   = true
+  block_public_policy = true
 }
