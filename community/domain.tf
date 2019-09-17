@@ -27,13 +27,15 @@ resource "aws_acm_certificate" "main" {
   validation_method             = "DNS"
 }
 
-# DNS validation records
+#
+# DNS validation records. Note that because the alternative names are part of
+# the same domain, there is only one required CNAME record.
+#
 resource "aws_route53_record" "validation" {
-  count     = 2
-  name      = "${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_name")}"
-  type      = "${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_type")}"
+  name      = "${aws_acm_certificate.main.domain_validation_options.0.resource_record_name}"
+  type      = "${aws_acm_certificate.main.domain_validation_options.0.resource_record_type}"
   zone_id   = "${aws_route53_zone.main.zone_id}"
-  records   = [ "${lookup(aws_acm_certificate.main.domain_validation_options[count.index], "resource_record_value")}" ]
+  records   = [ "${aws_acm_certificate.main.domain_validation_options.0.resource_record_value}" ]
   ttl       = "${local.dns-ttl}"
 }
 
@@ -41,7 +43,6 @@ resource "aws_route53_record" "validation" {
 resource "aws_acm_certificate_validation" "main" {
   certificate_arn           = "${aws_acm_certificate.main.arn}"
   validation_record_fqdns   = [
-    "${aws_route53_record.validation.0.fqdn}",
-    "${aws_route53_record.validation.1.fqdn}"
+    "${aws_route53_record.validation.fqdn}"
   ]
 }
