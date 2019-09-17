@@ -2,7 +2,7 @@
 
 set -xe
 
-PROJECT=titan-data-test
+PROJECT=titan-data
 REGION=$(aws configure get region)
 BOOTSTRAP=false
 
