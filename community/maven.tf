@@ -5,10 +5,6 @@
 resource "aws_s3_bucket" "maven" {
   bucket = "${var.project}-maven"
   force_destroy = true
-
-  tags = {
-    Name = "${var.project}-maven"
-  }
 }
 
 resource "aws_s3_bucket_policy" "maven" {
