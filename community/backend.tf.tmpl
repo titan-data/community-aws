@@ -1,0 +1,15 @@
+#
+# Configure the terraform state backend, using the state files created by
+# the 'state.tf' script. Because we cannot use variables in the backend
+# configuration, this template is actually processed by the 'init.sh' script
+# to generate the actual backend file, subs
+#
+
+terraform {
+  backend "s3" {
+    bucket         = "BACKEND_STATE"
+    region         = "AWS_REGION"
+    dynamodb_table = "BACKEND_STATE"
+    key            = "terraform.tfstate"
+  }
+}

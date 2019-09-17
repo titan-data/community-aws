@@ -1,6 +1,14 @@
-# About this Project
+# Titan Community AWS Resources
 
-Describe the project for users.
+This repository handles the setup and management of all AWS resources associated
+with the Titan community. This includes:
+
+  * S3 buckets for downloads, demos, and testing
+  * DNS and website configuration
+  * IAM roles for project automation
+
+And whatever else is needed by the community that doesn't fit into an existing
+service like GitHub or Travis.
 
 ## Contributing
 
