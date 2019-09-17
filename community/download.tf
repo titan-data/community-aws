@@ -49,7 +49,7 @@ resource "aws_cloudfront_distribution" "download-site" {
 
   logging_config {
     include_cookies     = false
-    bucket              = "${aws_s3_bucket.logs.id}"
+    bucket              = "${aws_s3_bucket.logs.bucket_domain_name}"
     prefix              = "download-site/"
   }
 

@@ -21,8 +21,12 @@ resource "aws_route53_zone" "alt" {
   name = "${local.domain-alt}"
 }
 
-# Configure a TLS certificate
+#
+# Configure a TLS certificate. Due to CloudFront restrictions, this must be
+# provisioned in the us-east-1 region.
+#
 resource "aws_acm_certificate" "main" {
+  provider                      = "aws.us-east-1"
   domain_name                   = "${local.domain}"
   subject_alternative_names     = [ "*.${local.domain}" ]
   validation_method             = "DNS"
