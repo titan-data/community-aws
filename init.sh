@@ -41,7 +41,7 @@ if [[ $BOOTSTRAP = true ]]; then
   terraform init -input=false bootstrap
   terraform plan -out=tfplan -input=false bootstrap
   terraform apply -input=false tfplan
-  terraform init -force-copy community
+  echo no | terraform init -reconfigure community
 else
   terraform init community
 fi
