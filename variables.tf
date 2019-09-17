@@ -12,6 +12,6 @@ provider "aws" {
 
 locals {
   domain = "${var.project}.io"
-  domain-short = replace("${var.project}.io", "-", "")
+  domain-alt = replace("${var.project}.io", "-", "")
   dns-ttl = 300
 }
