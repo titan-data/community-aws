@@ -39,7 +39,7 @@ EOF
 resource "aws_cloudfront_distribution" "maven" {
   provider              = "aws.us-east-1"
   origin {
-    domain_name         = "${aws_s3_bucket.maven.website_endpoint}"
+    domain_name         = "${aws_s3_bucket.maven.bucket_domain_name}"
     origin_id           = "${aws_s3_bucket.maven.id}-origin"
   }
 

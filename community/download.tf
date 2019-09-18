@@ -48,7 +48,7 @@ EOF
 resource "aws_cloudfront_distribution" "download" {
   provider              = "aws.us-east-1"
   origin {
-    domain_name         = "${aws_s3_bucket.download.website_endpoint}"
+    domain_name         = "${aws_s3_bucket.download.bucket_domain_name}"
     origin_id           = "${aws_s3_bucket.download.id}-origin"
   }
 
