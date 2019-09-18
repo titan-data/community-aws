@@ -46,6 +46,7 @@ resource "aws_cloudfront_distribution" "maven" {
   enabled               = true
   aliases               = [ "maven.titan-data.io" ]
   default_root_object   = "index.html"
+  price_class           = "PriceClass_100"
 
   default_cache_behavior {
     allowed_methods     = [ "DELETE", "GET", "HEAD", "OPTIONS", "PATCH",
