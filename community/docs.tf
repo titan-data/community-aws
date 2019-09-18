@@ -7,7 +7,7 @@
 #
 
 resource "aws_route53_record" "www" {
-  zone_id   = "${aws_route53_zone.domain.zone_id}"
+  zone_id   = "${aws_route53_zone.main.zone_id}"
   name      = "www"
   type      = "CNAME"
   records   = [ "titan-data.github.io" ]
@@ -15,7 +15,7 @@ resource "aws_route53_record" "www" {
 }
 
 resource "aws_route53_record" "www-alias" {
-  zone_id   = "${aws_route53_zone.domain.zone_id}"
+  zone_id   = "${aws_route53_zone.main.zone_id}"
   name      = ""
   type      = "A"
   records   = [
